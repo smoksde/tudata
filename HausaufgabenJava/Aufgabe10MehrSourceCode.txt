@@ -1,0 +1,79 @@
+import java.util.LinkedList;
+
+public class ExceptionHandling{
+
+    public static LinkedList listFlatten(LinkedList l){
+        LinkedList res = new LinkedList();
+        for (Object x :l) {
+            System.out.println(x);
+            res.addAll((LinkedList)x);
+        }
+        return res;
+    }
+
+    public static double mean(Integer[] a, int i, int j){
+        int sum = 0;
+        for(int k= i; k<=j;k++){
+            sum = sum + a[k];
+        }
+        return sum / (1+j-i);
+    }
+
+    public static void main(String[] args) {
+        Integer[] ints = {1,2,3};
+        LinkedList l = new LinkedList();
+        l.add(null);
+        for(Integer i : Arrays.asList(ints)){
+	    l.add(i);
+	}
+        l = listFlatten(l);
+
+        System.out.println(mean(ints,2,4));
+        System.out.println(mean(ints,2,2));
+        ints[2] = null;
+        System.out.println(mean(ints,0,2));
+    }
+}
+
+public class BubbleSort {
+
+    static void bubbleSort(int arr[]) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++)
+            for (int j = 0; j < n - i - 1; j++)
+                if (arr[j] > arr[j + 1]) {
+                    // swap temp and arr[i]
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+    }
+
+    static Boolean sorted(int[] arr){
+        Boolean res = true;
+        for(int i=0;i<arr.length-1;res = res & (arr[i]<= arr[++i]));
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int[] x = new int[100];
+        Thread[] threads = new Thread[x.length/10];
+
+        do {
+            for(int i=0;i<x.length;i++)
+                x[i] = (int) (x.length*java.lang.Math.random());
+            for (int i = 0; i < threads.length; i++) {
+                threads[i] = new Bubbler(x);
+            }
+            for (int i = 0; i < threads.length; i++) {
+                threads[i].start();
+            }
+        } while(sorted(x));
+        System.out.println("oops");
+    }
+}
+
+class Bubbler extends Thread{
+
+    // the solution goes here
+}
